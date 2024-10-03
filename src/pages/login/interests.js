@@ -1,8 +1,16 @@
-import React from "react";
-import { Button, Stack, Typography, TextField } from "@mui/material";
+import React, { useState } from "react";
+import {
+    Button,
+    Stack,
+    Typography,
+    TextField,
+    Autocomplete,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import backgroundImage from "../../midia/background_login.jpg";
 
 function App() {
+    const [name, setName] = useState("");
     const navigate = useNavigate();
 
     return (
@@ -11,15 +19,29 @@ function App() {
             alignItems="center"
             width="100vw"
             height="100vh"
+            position="relative"
             sx={{
                 margin: 0,
                 color: "#fff",
+                backgroundImage: `url(${backgroundImage})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
             }}
         >
             <Stack
+                width="100vw"
+                height="100vh"
+                position="absolute"
+                sx={{
+                    background: "black",
+                    opacity: 0.9,
+                }}
+            ></Stack>
+            <Stack
                 bgcolor="#fff"
-                width="700px"
-                height="800px"
+                width="600px"
+                height="700px"
                 borderRadius="10px"
                 padding="40px"
                 boxSizing="border-box"
@@ -30,37 +52,75 @@ function App() {
                 position="relative"
                 boxShadow={3}
             >
-                <Typography
-                    sx={{
-                        color: (theme) => theme.palette.primary.main,
-                        marginBottom: "20px",
-                    }}
-                    variant="h4"
+                <Stack
+                    alignItems="center"
+                    direction="row"
+                    spacing={1}
+                    mb="15px"
                 >
-                    Do que você gosta?
-                </Typography>
+                    <Typography
+                        sx={{ color: (theme) => theme.palette.primary.main }}
+                        variant="h4"
+                    >
+                        Do que você
+                    </Typography>
+                    <Typography
+                        sx={{ color: (theme) => theme.palette.secondary.main }}
+                        variant="h4"
+                    >
+                        gosta
+                    </Typography>
+                    <Typography
+                        sx={{ color: (theme) => theme.palette.primary.main }}
+                        variant="h4"
+                    >
+                        ?
+                    </Typography>
+                </Stack>
 
-                <TextField
-                    label="Nome"
-                    variant="outlined"
-                    sx={{
-                        marginTop: "20px",
-                        width: "100%",
-                        "& .MuiOutlinedInput-root": {
-                            "& fieldset": {
-                                borderColor: (theme) =>
-                                    theme.palette.primary.main,
-                            },
-                            "&:hover fieldset": {
-                                borderColor: (theme) =>
-                                    theme.palette.secondary.main,
-                            },
-                            "&.Mui-focused fieldset": {
-                                borderColor: (theme) =>
-                                    theme.palette.secondary.main,
-                            },
-                        },
-                    }}
+                <Autocomplete
+                    multiple
+                    limitTags={10}
+                    options={[
+                        { title: "Anime" },
+                        { title: "Marvel" },
+                        { title: "Comics" },
+                        { title: "DC" },
+                        { title: "Séries" },
+                        { title: "Filmes" },
+                        { title: "Famosos" },
+                        { title: "Música" },
+                        { title: "Jogos" },
+                        { title: "Tecnologia" },
+                        { title: "Literatura" },
+                        { title: "Desenhos Animados" },
+                        { title: "História" },
+                        { title: "Cultura Pop" },
+                    ]}
+                    getOptionLabel={(option) => option.title}
+                    renderOption={(props, option) => (
+                        <li
+                            {...props}
+                            style={{ backgroundColor: "#fff", color: "#000" }}
+                        >
+                            {option.title}
+                        </li>
+                    )}
+                    renderInput={(params) => (
+                        <TextField
+                            {...params}
+                            label="Favoritos"
+                            placeholder="Escolha bem..."
+                            sx={{
+                                "& .MuiAutocomplete-tag": {
+                                    background: (theme) =>
+                                        theme.palette.secondary.main,
+                                    color: "white",
+                                },
+                            }}
+                        />
+                    )}
+                    sx={{ width: "500px" }}
                 />
 
                 <Button

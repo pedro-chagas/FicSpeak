@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Stack, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import backgroundImage from "../../midia/background_login.jpg";
 
 function App() {
     const navigate = useNavigate();
@@ -11,14 +12,29 @@ function App() {
             alignItems="center"
             width="100vw"
             height="100vh"
+            position="relative"
             sx={{
                 margin: 0,
+                color: "#fff",
+                backgroundImage: `url(${backgroundImage})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
             }}
         >
             <Stack
+                width="100vw"
+                height="100vh"
+                position="absolute"
+                sx={{
+                    background: "black",
+                    opacity: 0.9,
+                }}
+            ></Stack>
+            <Stack
                 bgcolor="#ffff"
-                width="700px"
-                height="800px"
+                width="600px"
+                height="700px"
                 borderRadius="10px"
                 padding="20px"
                 boxSizing="border-box"
