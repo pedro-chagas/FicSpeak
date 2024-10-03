@@ -2,14 +2,7 @@ import * as React from "react";
 import { createBrowserRouter, redirect } from "react-router-dom";
 import Welcome from "../pages/login";
 import Name from "../pages/login/name";
-
-// function isAuthenticated() {
-//     const user = localStorage.getItem("user");
-//     if (!user) {
-//         return redirect("/login");
-//     }
-//     return null;
-// }
+import Interests from "../pages/login/interests";
 
 const router = createBrowserRouter([
     {
@@ -20,11 +13,10 @@ const router = createBrowserRouter([
         path: "/login/name",
         element: <Name />,
     },
-    // {
-    //     path: "/home",
-    //     element: <Home />,
-    //     loader: isAuthenticated,
-    // },
+    {
+        path: "/login/interests",
+        element: <Interests />,
+    },
 ]);
 
 export default router;

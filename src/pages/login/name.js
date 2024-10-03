@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Stack, Typography, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import backgroundImage from "../../midia/background_login.jpg";
 
 function App() {
+    const [name, setName] = useState("");
     const navigate = useNavigate();
 
     return (
@@ -11,15 +13,29 @@ function App() {
             alignItems="center"
             width="100vw"
             height="100vh"
+            position="relative"
             sx={{
                 margin: 0,
                 color: "#fff",
+                backgroundImage: `url(${backgroundImage})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
             }}
         >
             <Stack
+                width="100vw"
+                height="100vh"
+                position="absolute"
+                sx={{
+                    background: "black",
+                    opacity: 0.9,
+                }}
+            ></Stack>
+            <Stack
                 bgcolor="#fff"
-                width="700px"
-                height="800px"
+                width="600px"
+                height="700px"
                 borderRadius="10px"
                 padding="40px"
                 boxSizing="border-box"
@@ -30,23 +46,37 @@ function App() {
                 position="relative"
                 boxShadow={3}
             >
-                <Typography
-                    sx={{
-                        color: (theme) => theme.palette.primary.main,
-                        marginBottom: "20px",
-                    }}
-                    variant="h4"
-                >
-                    Qual é o seu nome?
-                </Typography>
+                <Stack alignItems="center" direction="row" spacing={1}>
+                    <Typography
+                        sx={{ color: (theme) => theme.palette.primary.main }}
+                        variant="h4"
+                    >
+                        Qual é o seu
+                    </Typography>
+                    <Typography
+                        sx={{ color: (theme) => theme.palette.secondary.main }}
+                        variant="h4"
+                    >
+                        nome
+                    </Typography>
+                    <Typography
+                        sx={{ color: (theme) => theme.palette.primary.main }}
+                        variant="h4"
+                    >
+                        ?
+                    </Typography>
+                </Stack>
 
                 <TextField
                     label="Nome"
                     variant="outlined"
+                    onChange={(e) => setName(e.target.value)}
                     sx={{
                         marginTop: "20px",
                         width: "100%",
+                        color: "black",
                         "& .MuiOutlinedInput-root": {
+                            color: "black",
                             "& fieldset": {
                                 borderColor: (theme) =>
                                     theme.palette.primary.main,
@@ -60,13 +90,19 @@ function App() {
                                     theme.palette.secondary.main,
                             },
                         },
+                        "& .MuiInputLabel-root": {
+                            color: "black",
+                        },
+                        "& .MuiInputLabel-root.Mui-focused": {
+                            color: (theme) => theme.palette.primary.main,
+                        },
                     }}
                 />
 
                 <Button
                     variant="contained"
                     size="large"
-                    onClick={() => navigate("/login/name")}
+                    onClick={() => navigate("/login/interests")}
                     sx={{
                         marginTop: "30px",
                         backgroundColor: (theme) =>
