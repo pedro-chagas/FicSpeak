@@ -10,7 +10,7 @@ function App() {
         <Stack
             justifyContent="center"
             alignItems="center"
-            width="100vw"
+            width="100%"
             height="100vh"
             position="relative"
             sx={{
@@ -20,6 +20,7 @@ function App() {
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
+                overflow: "hidden",
             }}
         >
             <Stack
@@ -27,7 +28,7 @@ function App() {
                 height="100vh"
                 position="absolute"
                 sx={{
-                    background: "black",
+                    background: "#0d0d0d",
                     opacity: 0.9,
                 }}
             ></Stack>

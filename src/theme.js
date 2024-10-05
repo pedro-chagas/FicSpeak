@@ -9,7 +9,7 @@ const theme = createTheme({
             main: "#6A4C9C",
         },
         background: {
-            default: "#1D3557",
+            default: "#0a182b",
         },
         text: {
             primary: "#FFFFFF",
@@ -22,7 +22,7 @@ const theme = createTheme({
         },
     },
     typography: {
-        fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+        fontFamily: '"Karla", sans-serif',
         h1: {
             fontWeight: 700,
             fontSize: "2.5rem",
