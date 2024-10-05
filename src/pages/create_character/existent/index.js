@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { Button, Stack, Typography, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import backgroundImage from "../../midia/background_login.jpg";
+import backgroundImage from "../../../midia/wallpaper_create_existing.jpg";
 
 function App() {
     const [name, setName] = useState("");
     const navigate = useNavigate();
 
     function next() {
-        navigate("/login/interests");
-        localStorage.setItem("name", name);
+        navigate("/create/existent/universe");
     }
 
     return (
@@ -33,7 +32,7 @@ function App() {
                 height="100%"
                 position="absolute"
                 sx={{
-                    background: "#0d0d0d",
+                    background: "#1f1f1f",
                     opacity: 0.9,
                 }}
             ></Stack>
@@ -50,30 +49,33 @@ function App() {
                 alignItems="center"
                 position="relative"
                 boxShadow={3}
+                spacing={6}
             >
-                <Stack alignItems="center" direction="row" spacing={1}>
+                <Stack direction="column">
                     <Typography
-                        sx={{ color: (theme) => theme.palette.primary.main }}
+                        sx={{
+                            color: "#000",
+                            fontWeight: 900,
+                        }}
                         variant="h4"
                     >
-                        Qual é o seu
+                        QUAL É O NOME
                     </Typography>
+
                     <Typography
-                        sx={{ color: (theme) => theme.palette.secondary.main }}
-                        variant="h4"
+                        sx={{
+                            color: "#000",
+                            marginTop: "0",
+                        }}
+                        fontWeight={100}
+                        variant="h5"
                     >
-                        nome
-                    </Typography>
-                    <Typography
-                        sx={{ color: (theme) => theme.palette.primary.main }}
-                        variant="h4"
-                    >
-                        ?
+                        do personagem
                     </Typography>
                 </Stack>
 
                 <TextField
-                    label="Nome"
+                    placeholder="ex: Alvo Dumbledore"
                     variant="outlined"
                     onChange={(e) => setName(e.target.value)}
                     sx={{

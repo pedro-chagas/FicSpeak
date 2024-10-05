@@ -1,15 +1,25 @@
 import React, { useState } from "react";
-import { Button, Stack, Typography, TextField } from "@mui/material";
+import { Stack, Typography, Alert, Avatar, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import backgroundImage from "../../midia/background_login.jpg";
+import backgroundImage from "../../../midia/wallpaper_create_existing.jpg";
 
 function App() {
-    const [name, setName] = useState("");
+    const [avatar, setAvatar] = useState(null);
     const navigate = useNavigate();
 
     function next() {
-        navigate("/login/interests");
-        localStorage.setItem("name", name);
+        navigate("/", { state: { createdCharacter: true } });
+    }
+
+    function handleAvatarChange(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                setAvatar(e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
     }
 
     return (
@@ -33,7 +43,7 @@ function App() {
                 height="100%"
                 position="absolute"
                 sx={{
-                    background: "#0d0d0d",
+                    background: "#1f1f1f",
                     opacity: 0.9,
                 }}
             ></Stack>
@@ -50,65 +60,57 @@ function App() {
                 alignItems="center"
                 position="relative"
                 boxShadow={3}
+                spacing={10}
             >
-                <Stack alignItems="center" direction="row" spacing={1}>
+                <Stack direction="column">
                     <Typography
-                        sx={{ color: (theme) => theme.palette.primary.main }}
+                        sx={{
+                            color: "#000",
+                            fontWeight: 900,
+                        }}
                         variant="h4"
                     >
-                        Qual é o seu
+                        QUAL É O AVATAR
                     </Typography>
+
                     <Typography
-                        sx={{ color: (theme) => theme.palette.secondary.main }}
-                        variant="h4"
+                        sx={{
+                            color: "#000",
+                            marginTop: "0",
+                        }}
+                        fontWeight={100}
+                        variant="h5"
                     >
-                        nome
-                    </Typography>
-                    <Typography
-                        sx={{ color: (theme) => theme.palette.primary.main }}
-                        variant="h4"
-                    >
-                        ?
+                        do personagem
                     </Typography>
                 </Stack>
 
-                <TextField
-                    label="Nome"
-                    variant="outlined"
-                    onChange={(e) => setName(e.target.value)}
-                    sx={{
-                        marginTop: "20px",
-                        width: "100%",
-                        color: "black",
-                        "& .MuiOutlinedInput-root": {
-                            color: "black",
-                            "& fieldset": {
-                                borderColor: (theme) =>
-                                    theme.palette.primary.main,
-                            },
-                            "&:hover fieldset": {
-                                borderColor: (theme) =>
-                                    theme.palette.secondary.main,
-                            },
-                            "&.Mui-focused fieldset": {
-                                borderColor: (theme) =>
-                                    theme.palette.secondary.main,
-                            },
-                        },
-                        "& .MuiInputLabel-root": {
-                            color: "black",
-                        },
-                        "& .MuiInputLabel-root.Mui-focused": {
-                            color: (theme) => theme.palette.primary.main,
-                        },
-                    }}
+                <input
+                    accept="image/*"
+                    style={{ display: "none" }}
+                    id="avatar-upload"
+                    type="file"
+                    onChange={handleAvatarChange}
                 />
+
+                <label htmlFor="avatar-upload">
+                    <Avatar
+                        alt="Avatar Preview"
+                        src={avatar}
+                        sx={{
+                            width: 150,
+                            height: 150,
+                            marginBottom: "20px",
+                            cursor: "pointer",
+                        }}
+                    />
+                </label>
 
                 <Button
                     variant="contained"
                     size="large"
                     onClick={next}
-                    disabled={name === ""}
+                    disabled={avatar === null}
                     sx={{
                         marginTop: "30px",
                         backgroundColor: (theme) =>

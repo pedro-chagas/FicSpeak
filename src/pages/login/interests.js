@@ -10,14 +10,20 @@ import { useNavigate } from "react-router-dom";
 import backgroundImage from "../../midia/background_login.jpg";
 
 function App() {
-    const [name, setName] = useState("");
+    const [interests, setInterests] = useState("");
     const navigate = useNavigate();
+
+    function next() {
+        navigate("/");
+
+        localStorage.setItem("interests", JSON.stringify(interests));
+    }
 
     return (
         <Stack
             justifyContent="center"
             alignItems="center"
-            width="100vw"
+            width="100%"
             height="100vh"
             position="relative"
             sx={{
@@ -30,11 +36,11 @@ function App() {
             }}
         >
             <Stack
-                width="100vw"
-                height="100vh"
+                width="100%"
+                height="100%"
                 position="absolute"
                 sx={{
-                    background: "black",
+                    background: "#0d0d0d",
                     opacity: 0.9,
                 }}
             ></Stack>
@@ -97,6 +103,7 @@ function App() {
                         { title: "História" },
                         { title: "Cultura Pop" },
                     ]}
+                    onChange={(event, newValue) => setInterests(newValue)}
                     getOptionLabel={(option) => option.title}
                     renderOption={(props, option) => (
                         <li
@@ -126,7 +133,8 @@ function App() {
                 <Button
                     variant="contained"
                     size="large"
-                    onClick={() => navigate("/login/name")}
+                    onClick={next}
+                    disabled={interests === "" || interests === []}
                     sx={{
                         marginTop: "30px",
                         backgroundColor: (theme) =>
