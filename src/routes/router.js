@@ -17,6 +17,8 @@ import CreateCustomAvatar from "../pages/create_character/custom/avatar";
 import CreateCustomPersonality from "../pages/create_character/custom/personality";
 import CreateCustomHistory from "../pages/create_character/custom/history";
 
+import Chat from "../pages/chat";
+
 const isAuthenticated = () => {
     const name = localStorage.getItem("name");
 
@@ -82,6 +84,11 @@ const router = createBrowserRouter([
         path: "/create/custom/avatar",
         loader: isAuthenticated,
         element: <CreateCustomAvatar />,
+    },
+    {
+        path: "/chat/:id",
+        loader: isAuthenticated,
+        element: <Chat />,
     },
     {
         path: "/login",
