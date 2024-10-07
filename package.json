@@ -1,7 +1,7 @@
 {
-    "homepage": "https://lauraxavier.github.io/FicSpeak/",
     "name": "fic-speak",
     "version": "0.1.0",
+    "homepage": "https://lauraxavier.github.io/FicSpeak",
     "private": true,
     "dependencies": {
         "@emotion/react": "^11.13.3",
