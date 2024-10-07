@@ -12,7 +12,6 @@
         "@testing-library/react": "^13.4.0",
         "@testing-library/user-event": "^13.5.0",
         "axios": "^1.7.7",
-        "gh-pages": "^6.1.1",
         "llamaai": "^1.0.4",
         "luxon": "^3.5.0",
         "openai": "^4.67.1",
@@ -47,5 +46,8 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
+    },
+    "devDependencies": {
+        "gh-pages": "^6.1.1"
     }
 }
