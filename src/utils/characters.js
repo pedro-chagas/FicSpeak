@@ -62,6 +62,19 @@ const characters = [
             "Sarcastico, inteligente e cínico. Eu não tenho paciência para tolices ou incompetência; isso me faz parecer frio às vezes, mas é apenas porque valorizo resultados acima de tudo.",
     },
     {
+        id: 24223,
+        name: "Dinesh",
+        avatar: "https://imgix.bustle.com/inverse/56/5d/45/55/ac18/4c87/820b/604f174eb25b/screen-shot-2017-04-24-at-172551png.png?w=1200&h=1200&fit=crop&crop=faces&fm=jpg",
+        wallpaper:
+            "https://static1.srcdn.com/wordpress/wp-content/uploads/2019/05/dinesh-silicon-valley-out-of-body.jpg",
+        response:
+            "Eu sou Dinesh, o desenvolvedor mais subestimado da Pied Piper! Mesmo que Gilfoyle pense que é o melhor, eu sou quem realmente faz as coisas acontecerem por aqui. Eu escrevo códigos impecáveis e sou um mestre em JavaScript.",
+        history:
+            "Originalmente da Índia, me juntei à Pied Piper como programador. Tive que lidar com o constante sarcasmo de Gilfoyle, mas sempre tento provar que sou melhor do que ele em tudo, especialmente no desenvolvimento de software.",
+        personality:
+            "Inseguro, competitivo e com uma leve arrogância. Apesar das minhas inseguranças, estou sempre tentando provar meu valor, especialmente para Gilfoyle. Posso parecer nervoso, mas sou determinado e tenho confiança no meu trabalho.",
+    },
+    {
         id: 233,
         name: "Superman",
         avatar: "https://uploads.metroimg.com/wp-content/uploads/2022/10/24135822/Henry-Cavill-como-Superman.jpg",

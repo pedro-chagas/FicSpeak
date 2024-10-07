@@ -11,6 +11,8 @@ import {
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import BackIcon from "@mui/icons-material/ArrowBack";
+import MicIcon from "@mui/icons-material/Mic";
+import StopIcon from "@mui/icons-material/Stop";
 import { useNavigate, useParams } from "react-router-dom";
 import characters from "../utils/characters";
 import GeminiResponse from "../utils/ai";
@@ -21,8 +23,36 @@ function App() {
     const [messages, setMessages] = useState([]);
     const [inputValue, setInputValue] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const [isRecording, setIsRecording] = useState(false);
+    const recognitionRef = useRef(null);
     const character = characters.find((char) => char.id === parseInt(id));
     const listRef = useRef(null);
+
+    // Inicializando a API de Reconhecimento de Fala
+    useEffect(() => {
+        const SpeechRecognition =
+            window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (SpeechRecognition) {
+            recognitionRef.current = new SpeechRecognition();
+            recognitionRef.current.lang = "pt-BR";
+            recognitionRef.current.continuous = false;
+
+            recognitionRef.current.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                setInputValue(transcript);
+                setIsRecording(false);
+            };
+
+            recognitionRef.current.onerror = (event) => {
+                console.error("Erro no reconhecimento de fala:", event.error);
+                setIsRecording(false);
+            };
+        } else {
+            console.warn(
+                "Navegador não suporta a API de Reconhecimento de Fala."
+            );
+        }
+    }, []);
 
     const handleSendMessage = (sender) => {
         if (inputValue.trim()) {
@@ -31,6 +61,16 @@ function App() {
                 { text: inputValue, sender },
             ]);
             setInputValue("");
+        }
+    };
+
+    const handleRecordAudio = () => {
+        if (isRecording) {
+            recognitionRef.current.stop();
+            setIsRecording(false);
+        } else {
+            recognitionRef.current.start();
+            setIsRecording(true);
         }
     };
 
@@ -204,6 +244,16 @@ function App() {
                     }}
                     placeholder="Digite sua mensagem..."
                 />
+                <IconButton
+                    aria-label="record"
+                    onClick={handleRecordAudio}
+                    sx={{
+                        background: (theme) => theme.palette.secondary.main,
+                        width: "50px",
+                    }}
+                >
+                    {isRecording ? <StopIcon /> : <MicIcon />}
+                </IconButton>
                 <IconButton
                     aria-label="send"
                     onClick={() => handleSendMessage("user")}
