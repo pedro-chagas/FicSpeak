@@ -41,6 +41,11 @@ const router = createBrowserRouter([
         element: <CreateCharacter />,
     },
     {
+        path: "/FicSpeak",
+        loader: isAuthenticated,
+        element: <Home />,
+    },
+    {
         path: "/create/existent",
         loader: isAuthenticated,
         element: <CreateExistenting />,
