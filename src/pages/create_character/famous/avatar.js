@@ -34,10 +34,10 @@ function App() {
 
                     const characterData = {
                         name: state.name,
-                        history: state.history,
                         personality: state.personality,
                         response: state.response,
-                        universe: state.universe,
+                        nacionality: state.nacionality,
+                        details: state.details,
                         wallpaper: state.wallpaper,
                         avatar: avatarURL,
                     };

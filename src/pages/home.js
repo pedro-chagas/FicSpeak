@@ -12,8 +12,9 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
-import { useNavigate, useLocation } from "react-router-dom";
-import characters from "../utils/characters";
+    import { useNavigate, useLocation } from "react-router-dom";
+import { db, collection, getDocs } from "../firebaseConfig"; 
+
 
 function App() {
     const location = useLocation();
@@ -21,6 +22,21 @@ function App() {
     const characterCreated = state?.createdCharacter;
     const navigate = useNavigate();
     const [showAlert, setShowAlert] = useState(false);
+    const [characters, setCharacters] = useState([]); 
+
+    useEffect(() => {
+        const fetchCharacters = async () => {
+            const charactersCollection = collection(db, "characters");
+            const charactersSnapshot = await getDocs(charactersCollection);
+            const charactersList = charactersSnapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+            setCharacters(charactersList);
+        };
+
+        fetchCharacters();
+    }, []);
 
     useEffect(() => {
         if (characterCreated) {
@@ -28,7 +44,6 @@ function App() {
             const timer = setTimeout(() => {
                 setShowAlert(false);
                 navigate(location.pathname);
-                console.log(state);
             }, 5000);
 
             return () => clearTimeout(timer);
@@ -135,7 +150,7 @@ function App() {
                                 component="img"
                                 alt={character.name}
                                 height="140"
-                                image={character.avatar}
+                                image={character.avatar} // A URL do avatar deve ser pública
                             />
                             <CardContent>
                                 <Typography

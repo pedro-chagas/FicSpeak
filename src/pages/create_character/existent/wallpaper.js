@@ -1,57 +1,53 @@
 import React, { useState } from "react";
-import { Stack, Typography, Avatar, Button, CircularProgress } from "@mui/material";
+import { Stack, Typography, Button, CircularProgress } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
-import { storage, db, setDoc, doc } from "../../../firebaseConfig";
+import { storage } from "../../../firebaseConfig";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import backgroundImage from "../../../midia/wallpaper_create_existing.jpg";
 
 function App() {
-    const [avatar, setAvatar] = useState(null);
+    const [wallpaperFile, setWallpaperFile] = useState(null);  // Renomeado para evitar conflito
+    const [uploadedWallpaperURL, setUploadedWallpaperURL] = useState(null);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
     const { state } = location;
 
     async function next() {
-        if (avatar) {
-            setLoading(true);
+        if (wallpaperFile) {
+            setLoading(true);  // Começa o loading
 
-            const avatarRef = ref(storage, `avatars/${state.name}_${Date.now()}`);
-            const uploadTask = uploadBytesResumable(avatarRef, avatar);
+            const wallpaperRef = ref(storage, `wallpapers/${state.name}_${Date.now()}`);
+            const uploadTask = uploadBytesResumable(wallpaperRef, wallpaperFile);  // Usar o arquivo correto
 
-            uploadTask.on("state_changed",
+            uploadTask.on(
+                "state_changed",
                 (snapshot) => {
-                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    console.log("Avatar upload is " + progress + "% done");
+                    // Aqui pode-se mostrar o progresso do upload se necessário
                 },
                 (error) => {
-                    console.error("Error uploading avatar:", error);
-                    setLoading(false);
+                    console.error("Error uploading wallpaper:", error);
+                    setLoading(false);  // Termina o loading em caso de erro
                 },
                 async () => {
-                    const avatarURL = await getDownloadURL(avatarRef);
-                    console.log("Avatar URL:", avatarURL);
+                    // Quando o upload for concluído
+                    const wallpaperURL = await getDownloadURL(wallpaperRef);
+                    console.log("wallpaper URL:", wallpaperURL);
 
-                    const characterData = {
-                        name: state.name,
-                        history: state.history,
-                        personality: state.personality,
-                        response: state.response,
-                        universe: state.universe,
-                        wallpaper: state.wallpaper,
-                        avatar: avatarURL,
-                    };
+                    // Atualizar a URL do wallpaper
+                    setUploadedWallpaperURL(wallpaperURL);
 
-                    const docRef = doc(db, "characters", state.name);
-                    await setDoc(docRef, characterData);
-                    console.log("Character saved successfully!");
+                    // Navegar para a próxima tela, passando o estado atualizado
+                    // console.log(wallpaperURL);
+                    navigate("/create/existent/avatar", {
+                        state: { ...state, wallpaper:wallpaperURL },
+                    });
 
-                    navigate("/", { state: { createdCharacter: true } });
-                    setLoading(false); 
+                    setLoading(false);  // Finaliza o loading
                 }
             );
         } else {
-            console.error("No avatar provided!");
+            console.error("No wallpaper provided!");
         }
     }
 
@@ -65,7 +61,7 @@ function App() {
             sx={{
                 margin: 0,
                 color: "#fff",
-                backgroundImage: `url(${backgroundImage})`,
+                backgroundImage: `url(${uploadedWallpaperURL ? uploadedWallpaperURL : wallpaperFile ? URL.createObjectURL(wallpaperFile) : backgroundImage})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
@@ -104,7 +100,7 @@ function App() {
                         }}
                         variant="h4"
                     >
-                        QUAL É O AVATAR
+                        QUAL É A IMAGEM
                     </Typography>
 
                     <Typography
@@ -115,43 +111,55 @@ function App() {
                         fontWeight={100}
                         variant="h5"
                     >
-                        do personagem
+                        de fundo do personagem
                     </Typography>
                 </Stack>
 
                 <input
                     accept="image/*"
                     style={{ display: "none" }}
-                    id="avatar-upload"
+                    id="wallpaper-upload"
                     type="file"
-                    onChange={(e) => setAvatar(e.target.files[0])}
+                    onChange={(e) => setWallpaperFile(e.target.files[0])}  // Renomeado
                 />
 
-                <label htmlFor="avatar-upload">
-                    <Avatar
-                        alt="Avatar Preview"
-                        src={avatar ? URL.createObjectURL(avatar) : ""}
+                <label htmlFor="wallpaper-upload">
+                    <Stack
+                        alt="Wallpaper Preview"
                         sx={{
-                            width: 150,
-                            height: 150,
+                            width: 300,
+                            height: 300,
                             marginBottom: "20px",
                             cursor: "pointer",
+                            borderRadius: "10px",
+                            backgroundImage: wallpaperFile ? `url(${URL.createObjectURL(wallpaperFile)})` : "",
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            backgroundColor: !wallpaperFile ? "rgba(0, 0, 0, 0.5)" : "transparent",
+                            border: "2px dashed #ccc",
                         }}
-                    />
+                    >
+                        {!wallpaperFile ? (
+                            <Typography sx={{ color: "white", fontWeight: "bold", textAlign: "center", padding: "10px" }}>
+                                Selecione um fundo
+                            </Typography>
+                        ) : null}
+                    </Stack>
                 </label>
 
                 <Button
                     variant="contained"
                     size="large"
                     onClick={next}
-                    disabled={!avatar || loading}  
+                    disabled={!wallpaperFile || loading}  
                     sx={{
                         marginTop: "30px",
-                        backgroundColor: (theme) =>
-                            theme.palette.secondary.main,
+                        backgroundColor: (theme) => theme.palette.secondary.main,
                         "&:hover": {
-                            backgroundColor: (theme) =>
-                                theme.palette.secondary.dark,
+                            backgroundColor: (theme) => theme.palette.secondary.dark,
                         },
                         position: "absolute",
                         bottom: 20,

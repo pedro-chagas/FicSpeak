@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { Button, Stack, Typography, TextField } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import backgroundImage from "../../../midia/wallpaper_create_existing.jpg";
 
 function App() {
-    const [name, setName] = useState("");
+    const [history, setHistory] = useState("");
     const navigate = useNavigate();
+    const location = useLocation();
+    const { state } = location;
 
     function next() {
-        navigate("/create/custom/avatar");
+        navigate("/create/custom/wallpaper", { state: { ...state, history }});
     }
 
     return (
@@ -77,7 +79,7 @@ function App() {
                 <TextField
                     placeholder="Ex: Rex vem de uma dimensão onde a tecnologia avançou muito mais rapidamente do que na Terra. Ele decidiu explorar outras realidades, sempre à procura de novas experiências e desafios.Ele se tornou uma lenda entre viajantes dimensionais, conhecido por sua habilidade em escapar de situações perigosas com astúcia e um sorriso no rosto."
                     variant="outlined"
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e) => setHistory(e.target.value)}
                     rows={4}
                     maxRows={10}
                     multiline
@@ -113,7 +115,7 @@ function App() {
                     variant="contained"
                     size="large"
                     onClick={next}
-                    disabled={name === ""}
+                    disabled={history === ""}
                     sx={{
                         marginTop: "30px",
                         backgroundColor: (theme) =>

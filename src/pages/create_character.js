@@ -2,12 +2,11 @@ import React from "react";
 import {
     Stack,
     Typography,
-    TextField,
-    InputAdornment,
     IconButton,
 } from "@mui/material";
 import BackIcon from "@mui/icons-material/ArrowBack";
 import luffy from "../midia/luffy.png";
+import messi from "../midia/messi.png";
 import anonymous from "../midia/anonymous.png";
 import backgroundImage from "../midia/background_create.jpeg";
 import { useNavigate } from "react-router-dom";
@@ -125,6 +124,62 @@ function Create() {
                         variant="h5"
                     >
                         personagem
+                    </Typography>
+                </Stack>
+            </Stack>
+            <Stack
+                sx={{
+                    backgroundImage: `url(${messi})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                    transition: "500ms",
+                    "&:hover": {
+                        scale: "1.1",
+                    },
+                }}
+                width="300px"
+                height="350px"
+                margin="20px"
+                borderRadius="10px"
+                position="relative"
+                onClick={() => navigate("/create/famous")}
+            >
+                <Stack
+                    width="100%"
+                    height="100%"
+                    position="absolute"
+                    borderRadius="10px"
+                    alignItems="center"
+                    justifyContent="center"
+                    sx={{
+                        background: (theme) => theme.palette.grey[700],
+                        opacity: 0.9,
+                        cursor: "pointer",
+                    }}
+                >
+                    <Typography
+                        sx={{
+                            background: (theme) => theme.palette.grey[800],
+                            padding: "5px",
+                            borderRadius: "3px",
+                            fontWeight: "bold",
+                        }}
+                        variant="h5"
+                    >
+                        Criar um personagem
+                    </Typography>
+                    <Typography
+                        sx={{
+                            background: (theme) => theme.palette.grey[800],
+                            color: (theme) => theme.palette.action.active,
+                            padding: "5px",
+                            borderRadius: "0 0 3px 3px",
+                            fontWeight: "bolder",
+                        }}
+                        variant="h5"
+                    >
+                        famoso
                     </Typography>
                 </Stack>
             </Stack>

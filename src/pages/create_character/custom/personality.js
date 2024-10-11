@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { Button, Stack, Typography, TextField } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import backgroundImage from "../../../midia/wallpaper_create_existing.jpg";
 
 function App() {
-    const [name, setName] = useState("");
+    const [personality, setPersonality] = useState("");
     const navigate = useNavigate();
+    const location = useLocation();
+    const { state } = location;
 
     function next() {
-        navigate("/create/custom/history");
+        navigate("/create/custom/history", { state: { ...state, personality } });
     }
 
     return (
@@ -77,7 +79,7 @@ function App() {
                 <TextField
                     placeholder="Ex: É carismático e ousado, sempre buscando novas aventuras. Ele tem um senso de humor afiado e é conhecido por suas piadas rápidas. Apesar de seu jeito despreocupado, é extremamente inteligente e sempre tem um plano. Ele é um amigo leal, mas não hesita em se meter em problemas em nome da diversão."
                     variant="outlined"
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e) => setPersonality(e.target.value)}
                     rows={4}
                     maxRows={10}
                     multiline
@@ -113,7 +115,7 @@ function App() {
                     variant="contained"
                     size="large"
                     onClick={next}
-                    disabled={name === ""}
+                    disabled={personality === ""}
                     sx={{
                         marginTop: "30px",
                         backgroundColor: (theme) =>
