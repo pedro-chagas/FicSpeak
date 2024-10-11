@@ -8,7 +8,7 @@ function App() {
     const navigate = useNavigate();
 
     function next() {
-        navigate("/create/custom/response");
+        navigate("/create/custom/response", { state: { name }});
     }
 
     return (

@@ -14,7 +14,7 @@ import BackIcon from "@mui/icons-material/ArrowBack";
 import MicIcon from "@mui/icons-material/Mic";
 import StopIcon from "@mui/icons-material/Stop";
 import { useNavigate, useParams } from "react-router-dom";
-import characters from "../utils/characters";
+import { db, collection, getDocs, doc, getDoc } from "../firebaseConfig";
 import GeminiResponse from "../utils/ai";
 
 function App() {
@@ -24,11 +24,30 @@ function App() {
     const [inputValue, setInputValue] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [isRecording, setIsRecording] = useState(false);
+    const [character, setCharacter] = useState(null); 
     const recognitionRef = useRef(null);
-    const character = characters.find((char) => char.id === parseInt(id));
     const listRef = useRef(null);
 
-    // Inicializando a API de Reconhecimento de Fala
+    useEffect(() => {
+        const fetchCharacter = async () => {
+            try {
+                const characterDoc = await getDoc(doc(db, "characters", id));
+                if (characterDoc.exists()) {
+                    setCharacter(characterDoc.data());
+                    console.log(character);
+                } else {
+                    console.log("Personagem não encontrado!");
+                }
+            } catch (error) {
+                console.error("Erro ao buscar personagem:", error);
+            }
+        };
+
+        if (id) {
+            fetchCharacter();
+        }
+    }, [id]);
+
     useEffect(() => {
         const SpeechRecognition =
             window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -85,8 +104,7 @@ function App() {
                 const messageHistory = messages
                     .map(
                         (msg) =>
-                            `${
-                                msg.sender === "user" ? "Você" : character.name
+                            `${msg.sender === "user" ? "Você" : character.name
                             }: ${msg.text}`
                     )
                     .join("\n");
@@ -123,11 +141,24 @@ function App() {
         respondToUser();
     }, [messages, character]);
 
+    if (!character) {
+        return (
+            <Stack
+                height="100vh"
+                alignItems="center"
+                justifyContent="center"
+                sx={{ backgroundColor: "#333", color: "#fff" }}
+            >
+                <Typography variant="h6">Personagem não encontrado</Typography>
+            </Stack>
+        );
+    }
+
     return (
         <Stack
             height="100vh"
             sx={{
-                backgroundImage: `url(${character.wallpaper})`,
+                backgroundImage: character.wallpaper ? `url(${character.wallpaper})` : "none", 
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",

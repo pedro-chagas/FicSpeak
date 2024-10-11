@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { Button, Stack, Typography, TextField } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import backgroundImage from "../../../midia/wallpaper_create_existing.jpg";
 
 function App() {
     const [name, setName] = useState("");
     const navigate = useNavigate();
+    const location = useLocation();
+    const { state } = location;
 
     function next() {
-        navigate("/create/existent/universe");
+        navigate("/create/existent/history", { state: { ...state, name } });
     }
 
     return (

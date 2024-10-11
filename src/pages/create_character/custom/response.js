@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { Button, Stack, Typography, TextField } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import backgroundImage from "../../../midia/wallpaper_create_existing.jpg";
 
 function App() {
-    const [name, setName] = useState("");
+    const [response, setResponse] = useState("");
     const navigate = useNavigate();
+    const location = useLocation();
+    const { state } = location;
 
     function next() {
-        navigate("/create/custom/personality");
+        navigate("/create/custom/personality", { state: { ...state,response }});
     }
 
     return (
@@ -77,7 +79,7 @@ function App() {
                 <TextField
                     placeholder="Ex: Fala de maneira confiante e empolgada, frequentemente usando gírias modernas e expressões que refletem seu amor por tecnologia e velocidade. Ele tende a usar metáforas relacionadas a corridas e tecnologia, como “Vamos acelerar essa missão!” ou “Isso é tão emocionante quanto uma corrida intergaláctica!"
                     variant="outlined"
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e) => setResponse(e.target.value)}
                     rows={4}
                     maxRows={10}
                     multiline
@@ -113,7 +115,7 @@ function App() {
                     variant="contained"
                     size="large"
                     onClick={next}
-                    disabled={name === ""}
+                    disabled={response === ""}
                     sx={{
                         marginTop: "30px",
                         backgroundColor: (theme) =>
