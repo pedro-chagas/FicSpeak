@@ -39,10 +39,10 @@ function App() {
             ></Stack>
             <Stack
                 bgcolor="#fff"
-                width="600px"
-                height="700px"
+                width={{ xs: "90%", sm: "500px", md: "600px" }}  // Responsivo
+                height={{ xs: "500px", md: "700px" }}  // Responsivo
                 borderRadius="10px"
-                padding="40px"
+                padding={{ xs: "20px", md: "40px" }}  // Responsivo
                 boxSizing="border-box"
                 display="flex"
                 flexDirection="column"
@@ -55,18 +55,21 @@ function App() {
                     <Typography
                         sx={{ color: (theme) => theme.palette.primary.main }}
                         variant="h4"
+                        fontSize={{ xs: "1.5rem", md: "2rem" }} // Responsivo
                     >
                         Qual é o seu
                     </Typography>
                     <Typography
                         sx={{ color: (theme) => theme.palette.secondary.main }}
                         variant="h4"
+                        fontSize={{ xs: "1.5rem", md: "2rem" }} // Responsivo
                     >
                         nome
                     </Typography>
                     <Typography
                         sx={{ color: (theme) => theme.palette.primary.main }}
                         variant="h4"
+                        fontSize={{ xs: "1.5rem", md: "2rem" }} // Responsivo
                     >
                         ?
                     </Typography>

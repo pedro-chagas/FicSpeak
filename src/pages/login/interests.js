@@ -10,13 +10,12 @@ import { useNavigate } from "react-router-dom";
 import backgroundImage from "../../midia/background_login.jpg";
 
 function App() {
-    const [interests, setInterests] = useState("");
+    const [interests, setInterests] = useState([]);
     const navigate = useNavigate();
 
     function next() {
-        navigate("/");
-
         localStorage.setItem("interests", JSON.stringify(interests));
+        navigate("/");
     }
 
     return (
@@ -44,12 +43,13 @@ function App() {
                     opacity: 0.9,
                 }}
             ></Stack>
+
             <Stack
                 bgcolor="#fff"
-                width="600px"
-                height="700px"
+                width={{ xs: "90%", sm: "500px", md: "600px" }}  // Responsivo
+                height={{ xs: "500px", md: "700px" }}  // Altura flexível para mobile
                 borderRadius="10px"
-                padding="40px"
+                padding={{ xs: "20px", md: "40px" }}  // Responsivo
                 boxSizing="border-box"
                 display="flex"
                 flexDirection="column"
@@ -58,27 +58,25 @@ function App() {
                 position="relative"
                 boxShadow={3}
             >
-                <Stack
-                    alignItems="center"
-                    direction="row"
-                    spacing={1}
-                    mb="15px"
-                >
+                <Stack alignItems="center" direction="row" spacing={1} >
                     <Typography
                         sx={{ color: (theme) => theme.palette.primary.main }}
                         variant="h4"
+                        fontSize={{ xs: "1.5rem", md: "2rem" }} // Responsivo
                     >
                         Do que você
                     </Typography>
                     <Typography
                         sx={{ color: (theme) => theme.palette.secondary.main }}
                         variant="h4"
+                        fontSize={{ xs: "1.5rem", md: "2rem" }} // Responsivo
                     >
                         gosta
                     </Typography>
                     <Typography
                         sx={{ color: (theme) => theme.palette.primary.main }}
                         variant="h4"
+                        fontSize={{ xs: "1.5rem", md: "2rem" }} // Responsivo
                     >
                         ?
                     </Typography>
@@ -103,13 +101,10 @@ function App() {
                         { title: "História" },
                         { title: "Cultura Pop" },
                     ]}
-                    onChange={(event, newValue) => setInterests(newValue)}
                     getOptionLabel={(option) => option.title}
+                    onChange={(event, newValue) => setInterests(newValue)}
                     renderOption={(props, option) => (
-                        <li
-                            {...props}
-                            style={{ backgroundColor: "#fff", color: "#000" }}
-                        >
+                        <li {...props} style={{ backgroundColor: "#fff", color: "#000" }}>
                             {option.title}
                         </li>
                     )}
@@ -120,21 +115,21 @@ function App() {
                             placeholder="Escolha bem..."
                             sx={{
                                 "& .MuiAutocomplete-tag": {
-                                    background: (theme) =>
+                                    backgroundColor: (theme) =>
                                         theme.palette.secondary.main,
-                                    color: "white",
+                                    color: "#fff",
                                 },
                             }}
                         />
                     )}
-                    sx={{ width: "500px" }}
+                    sx={{ width: '100%', marginTop: '20px' }} // Responsivo para largura e margem superior
                 />
 
                 <Button
                     variant="contained"
                     size="large"
                     onClick={next}
-                    disabled={interests === "" || interests === []}
+                    disabled={interests.length === 0}
                     sx={{
                         marginTop: "30px",
                         backgroundColor: (theme) =>

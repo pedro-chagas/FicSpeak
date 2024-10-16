@@ -149,7 +149,7 @@ function App() {
                 justifyContent="center"
                 sx={{ backgroundColor: "#333", color: "#fff" }}
             >
-                <Typography variant="h6">Personagem não encontrado</Typography>
+                {/* <Typography variant="h6">Personagem não encontrado</Typography> */}
             </Stack>
         );
     }
@@ -290,7 +290,7 @@ function App() {
                     onClick={() => handleSendMessage("user")}
                     sx={{
                         background: (theme) => theme.palette.secondary.main,
-                        width: "50px",
+                        width: { xs: "40px", md: "50px" },
                     }}
                 >
                     <SendIcon />
