@@ -38,12 +38,13 @@ function App() {
                     opacity: 0.9,
                 }}
             ></Stack>
+
             <Stack
                 bgcolor="#fff"
-                width="600px"
-                height="700px"
+                width={{ xs: "90%", sm: "600px" }} // Largura responsiva para celulares e desktops
+                maxWidth="600px" // Largura máxima para desktops
                 borderRadius="10px"
-                padding="40px"
+                padding={{ xs: "20px", sm: "40px" }} // Padding responsivo
                 boxSizing="border-box"
                 display="flex"
                 flexDirection="column"
@@ -51,13 +52,13 @@ function App() {
                 alignItems="center"
                 position="relative"
                 boxShadow={3}
-                spacing={6}
             >
-                <Stack direction="column">
+                <Stack direction="column" alignItems="center">
                     <Typography
                         sx={{
                             color: "#000",
                             fontWeight: 900,
+                            textAlign: "center", // Centraliza o texto
                         }}
                         variant="h4"
                     >
@@ -68,6 +69,7 @@ function App() {
                         sx={{
                             color: "#000",
                             marginTop: "0",
+                            textAlign: "center", // Centraliza o texto
                         }}
                         fontWeight={100}
                         variant="h5"
@@ -81,22 +83,20 @@ function App() {
                     variant="outlined"
                     onChange={(e) => setName(e.target.value)}
                     sx={{
+                        marginBottom: { sm: "100px" },
                         marginTop: "20px",
                         width: "100%",
                         color: "black",
                         "& .MuiOutlinedInput-root": {
                             color: "black",
                             "& fieldset": {
-                                borderColor: (theme) =>
-                                    theme.palette.primary.main,
+                                borderColor: (theme) => theme.palette.primary.main,
                             },
                             "&:hover fieldset": {
-                                borderColor: (theme) =>
-                                    theme.palette.secondary.main,
+                                borderColor: (theme) => theme.palette.secondary.main,
                             },
                             "&.Mui-focused fieldset": {
-                                borderColor: (theme) =>
-                                    theme.palette.secondary.main,
+                                borderColor: (theme) => theme.palette.secondary.main,
                             },
                         },
                         "& .MuiInputLabel-root": {
@@ -108,6 +108,7 @@ function App() {
                     }}
                 />
 
+                {/* Botão Responsivo */}
                 <Button
                     variant="contained"
                     size="large"
@@ -115,15 +116,14 @@ function App() {
                     disabled={name === ""}
                     sx={{
                         marginTop: "30px",
-                        backgroundColor: (theme) =>
-                            theme.palette.secondary.main,
+                        backgroundColor: (theme) => theme.palette.secondary.main,
                         "&:hover": {
-                            backgroundColor: (theme) =>
-                                theme.palette.secondary.dark,
+                            backgroundColor: (theme) => theme.palette.secondary.dark,
                         },
-                        position: "absolute",
-                        bottom: 20,
-                        right: 20,
+                        width: { xs: '100%', sm: '150px' }, // 100% em mobile e largura fixa em desktop
+                        position: { xs: 'static', sm: 'absolute' }, // Estilo estático em mobile e absoluto em desktop
+                        bottom: { sm: 20 }, // Posiciona no canto inferior direito em desktop
+                        right: { sm: 20 }, // Posiciona no canto inferior direito em desktop
                     }}
                 >
                     Próximo

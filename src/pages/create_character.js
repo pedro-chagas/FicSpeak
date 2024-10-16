@@ -3,6 +3,7 @@ import {
     Stack,
     Typography,
     IconButton,
+    Grid,
 } from "@mui/material";
 import BackIcon from "@mui/icons-material/ArrowBack";
 import luffy from "../midia/luffy.png";
@@ -20,7 +21,6 @@ function Create() {
             justifyContent="center"
             width="100%"
             height="100vh"
-            direction="row"
             boxShadow="border-box"
             sx={{
                 margin: 0,
@@ -45,6 +45,7 @@ function Create() {
                 sx={{
                     background: (theme) => theme.palette.primary.main,
                     boxShadow: 3,
+                    zIndex: 1000, 
                 }}
             >
                 <IconButton
@@ -71,174 +72,98 @@ function Create() {
                 }}
             />
 
-            <Stack
+            <Grid
+                container
+                justifyContent="center"
+                spacing={2}
                 sx={{
-                    backgroundImage: `url(${anonymous})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    transition: "500ms",
-                    "&:hover": {
-                        scale: "1.1",
-                    },
+                    padding: { xs: "10px", md: "20px" },
+                    marginTop: '100px', 
+                    maxWidth: '1200px', 
+                    width: '100%', 
                 }}
-                width="300px"
-                height="350px"
-                margin="20px"
-                borderRadius="10px"
-                position="relative"
-                onClick={() => navigate("/create/custom")}
             >
-                <Stack
-                    width="100%"
-                    height="100%"
-                    position="absolute"
-                    borderRadius="10px"
-                    alignItems="center"
-                    justifyContent="center"
-                    sx={{
-                        background: (theme) => theme.palette.grey[700],
-                        opacity: 0.9,
-                        cursor: "pointer",
-                    }}
-                >
-                    <Typography
-                        sx={{
-                            background: (theme) => theme.palette.grey[800],
-                            padding: "5px",
-                            borderRadius: "3px",
-                            fontWeight: "bold",
-                        }}
-                        variant="h5"
-                    >
-                        Criar seu próprio
-                    </Typography>
-                    <Typography
-                        sx={{
-                            background: (theme) => theme.palette.grey[800],
-                            color: (theme) => theme.palette.action.active,
-                            padding: "5px",
-                            borderRadius: "0 0 3px 3px",
-                            fontWeight: "bolder",
-                        }}
-                        variant="h5"
-                    >
-                        personagem
-                    </Typography>
-                </Stack>
-            </Stack>
-            <Stack
-                sx={{
-                    backgroundImage: `url(${messi})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    transition: "500ms",
-                    "&:hover": {
-                        scale: "1.1",
+                {[
+                    {
+                        image: anonymous,
+                        title: "Criar seu próprio",
+                        subtitle: "personagem",
+                        path: "/create/custom",
                     },
-                }}
-                width="300px"
-                height="350px"
-                margin="20px"
-                borderRadius="10px"
-                position="relative"
-                onClick={() => navigate("/create/famous")}
-            >
-                <Stack
-                    width="100%"
-                    height="100%"
-                    position="absolute"
-                    borderRadius="10px"
-                    alignItems="center"
-                    justifyContent="center"
-                    sx={{
-                        background: (theme) => theme.palette.grey[700],
-                        opacity: 0.9,
-                        cursor: "pointer",
-                    }}
-                >
-                    <Typography
-                        sx={{
-                            background: (theme) => theme.palette.grey[800],
-                            padding: "5px",
-                            borderRadius: "3px",
-                            fontWeight: "bold",
-                        }}
-                        variant="h5"
-                    >
-                        Criar um personagem
-                    </Typography>
-                    <Typography
-                        sx={{
-                            background: (theme) => theme.palette.grey[800],
-                            color: (theme) => theme.palette.action.active,
-                            padding: "5px",
-                            borderRadius: "0 0 3px 3px",
-                            fontWeight: "bolder",
-                        }}
-                        variant="h5"
-                    >
-                        famoso
-                    </Typography>
-                </Stack>
-            </Stack>
-            <Stack
-                sx={{
-                    backgroundImage: `url(${luffy})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    cursor: "pointer",
-                    transition: "500ms",
-                    "&:hover": {
-                        scale: "1.1",
+                    {
+                        image: messi,
+                        title: "Criar um personagem",
+                        subtitle: "famoso",
+                        path: "/create/famous",
                     },
-                }}
-                onClick={() => navigate("/create/existent")}
-                width="300px"
-                height="350px"
-                margin="20px"
-                borderRadius="10px"
-                position="relative"
-            >
-                <Stack
-                    width="100%"
-                    height="100%"
-                    position="absolute"
-                    borderRadius="10px"
-                    alignItems="center"
-                    justifyContent="center"
-                    sx={{
-                        background: (theme) => theme.palette.grey[700],
-                        opacity: 0.9,
-                    }}
-                >
-                    <Typography
-                        sx={{
-                            background: (theme) => theme.palette.grey[800],
-                            padding: "5px",
-                            borderRadius: "3px",
-                            fontWeight: "bold",
-                        }}
-                        variant="h5"
-                    >
-                        Criar personagem
-                    </Typography>
-                    <Typography
-                        sx={{
-                            background: (theme) => theme.palette.grey[800],
-                            color: (theme) => theme.palette.action.active,
-                            padding: "5px",
-                            borderRadius: "0 0 3px 3px",
-                            fontWeight: "bolder",
-                        }}
-                        variant="h5"
-                    >
-                        existente
-                    </Typography>
-                </Stack>
-            </Stack>
+                    {
+                        image: luffy,
+                        title: "Criar personagem",
+                        subtitle: "existente",
+                        path: "/create/existent",
+                    },
+                ].map(({ image, title, subtitle, path }, index) => (
+                    <Grid item xs={12} sm={6} md={4} key={index}>
+                        <Stack
+                            sx={{
+                                backgroundImage: `url(${image})`,
+                                backgroundSize: "cover",
+                                backgroundPosition: "center",
+                                backgroundRepeat: "no-repeat",
+                                cursor: "pointer",
+                                transition: "500ms",
+                                height: { xs: "200px", sm: "300px" }, 
+                                borderRadius: "10px",
+                                position: "relative",
+                                "&:hover": {
+                                    scale: "1.05",
+                                },
+                            }}
+                            onClick={() => navigate(path)}
+                        >
+                            <Stack
+                                width="100%"
+                                height="100%"
+                                position="absolute"
+                                borderRadius="10px"
+                                alignItems="center"
+                                justifyContent="center"
+                                sx={{
+                                    backgroundColor: (theme) => theme.palette.grey[700],
+                                    opacity: 0.9,
+                                    cursor: "pointer",
+                                }}
+                            >
+                                <Typography
+                                    sx={{
+                                        backgroundColor: (theme) => theme.palette.grey[800],
+                                        padding: "5px",
+                                        borderRadius: "3px",
+                                        fontWeight: "bold",
+                                    }}
+                                    variant="h6"
+                                    textAlign="center"
+                                >
+                                    {title}
+                                </Typography>
+                                <Typography
+                                    sx={{
+                                        backgroundColor: (theme) => theme.palette.grey[800],
+                                        color: (theme) => theme.palette.action.active,
+                                        padding: "5px",
+                                        borderRadius: "0 0 3px 3px",
+                                        fontWeight: "bolder",
+                                    }}
+                                    variant="body1" 
+                                    textAlign="center"
+                                >
+                                    {subtitle}
+                                </Typography>
+                            </Stack>
+                        </Stack>
+                    </Grid>
+                ))}
+            </Grid>
         </Stack>
     );
 }

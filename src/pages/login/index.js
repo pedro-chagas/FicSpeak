@@ -24,8 +24,8 @@ function App() {
             }}
         >
             <Stack
-                width="100vw"
-                height="100vh"
+                width="100%"
+                height="100%"
                 position="absolute"
                 sx={{
                     background: "#0d0d0d",
@@ -34,8 +34,9 @@ function App() {
             ></Stack>
             <Stack
                 bgcolor="#ffff"
-                width="600px"
-                height="700px"
+                width={{ xs: '90%', sm: '600px' }} // Largura responsiva
+                maxWidth="600px"
+                height={{ xs: '500px', sm: '700px' }} // Altura responsiva
                 borderRadius="10px"
                 padding="20px"
                 boxSizing="border-box"
@@ -45,7 +46,7 @@ function App() {
                 alignItems="center"
                 position="relative"
             >
-                <Stack alignItems="center" direction="row" spacing={1}>
+                <Stack alignItems="center" direction="column" spacing={1}>
                     <Typography
                         sx={{ color: (theme) => theme.palette.primary.main }}
                         variant="h4"

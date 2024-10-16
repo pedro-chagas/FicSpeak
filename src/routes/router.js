@@ -30,6 +30,7 @@ import CreateCustomPersonality from "../pages/create_character/custom/personalit
 import CreateCustomHistory from "../pages/create_character/custom/history";
 import CreateCustomWallpaper from "../pages/create_character/custom/wallpaper";
 
+import Crawler from "../crawler";
 import Chat from "../pages/chat";
 
 const isAuthenticated = () => {
@@ -49,13 +50,18 @@ const router = createBrowserRouter([
         element: <Home />,
     },
     {
+        path: "/crawler",
+        loader: isAuthenticated,
+        element: <Crawler />,
+    },
+    {
         path: "/create",
         loader: isAuthenticated,
         element: <CreateCharacter />,
     },
     {
         path: "/FicSpeak",
-        loader: isAuthenticated,
+        loader: () => redirect("/"),
         element: <Home />,
     },
     {

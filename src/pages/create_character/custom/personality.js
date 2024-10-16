@@ -38,12 +38,13 @@ function App() {
                     opacity: 0.9,
                 }}
             ></Stack>
+
             <Stack
                 bgcolor="#fff"
-                width="600px"
-                height="700px"
+                width={{ xs: "90%", sm: "600px" }} // Largura responsiva
+                maxWidth="600px" // Largura máxima
                 borderRadius="10px"
-                padding="40px"
+                padding={{ xs: "20px", sm: "40px" }} // Padding responsivo
                 boxSizing="border-box"
                 display="flex"
                 flexDirection="column"
@@ -51,13 +52,13 @@ function App() {
                 alignItems="center"
                 position="relative"
                 boxShadow={3}
-                spacing={6}
             >
-                <Stack direction="column">
+                <Stack direction="column" alignItems="center">
                     <Typography
                         sx={{
                             color: "#000",
                             fontWeight: 900,
+                            textAlign: "center", // Centraliza o texto
                         }}
                         variant="h4"
                     >
@@ -68,6 +69,7 @@ function App() {
                         sx={{
                             color: "#000",
                             marginTop: "0",
+                            textAlign: "center", // Centraliza o texto
                         }}
                         fontWeight={100}
                         variant="h5"
@@ -85,6 +87,7 @@ function App() {
                     multiline
                     sx={{
                         marginTop: "20px",
+                        marginBottom: { sm: "100px" }, // Espaçamento inferior em desktop
                         width: "100%",
                         color: "black",
                         "& .MuiOutlinedInput-root": {
@@ -111,6 +114,7 @@ function App() {
                     }}
                 />
 
+                {/* Botão Responsivo */}
                 <Button
                     variant="contained"
                     size="large"
@@ -124,9 +128,10 @@ function App() {
                             backgroundColor: (theme) =>
                                 theme.palette.secondary.dark,
                         },
-                        position: "absolute",
-                        bottom: 20,
-                        right: 20,
+                        width: { xs: '100%', sm: '150px' }, // 100% em mobile e largura fixa em desktop
+                        position: { xs: 'static', sm: 'absolute' }, // Estilo estático em mobile e absoluto em desktop
+                        bottom: { sm: 20 }, // Posiciona no canto inferior direito em desktop
+                        right: { sm: 20 }, // Posiciona no canto inferior direito em desktop
                     }}
                 >
                     Próximo

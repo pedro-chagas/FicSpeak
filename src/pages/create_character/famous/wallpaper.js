@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { Stack, Typography, Button, CircularProgress } from "@mui/material";
+import { Button, Stack, Typography, CircularProgress } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
 import { storage } from "../../../firebaseConfig";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import backgroundImage from "../../../midia/wallpaper_create_existing.jpg";
 
 function App() {
-    const [wallpaperFile, setWallpaperFile] = useState(null);  // Renomeado para evitar conflito
-    const [uploadedWallpaperURL, setUploadedWallpaperURL] = useState(null);
+    const [wallpaperFile, setWallpaperFile] = useState(null);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
@@ -18,7 +17,7 @@ function App() {
             setLoading(true);  // Começa o loading
 
             const wallpaperRef = ref(storage, `wallpapers/${state.name}_${Date.now()}`);
-            const uploadTask = uploadBytesResumable(wallpaperRef, wallpaperFile);  // Usar o arquivo correto
+            const uploadTask = uploadBytesResumable(wallpaperRef, wallpaperFile);
 
             uploadTask.on(
                 "state_changed",
@@ -32,15 +31,11 @@ function App() {
                 async () => {
                     // Quando o upload for concluído
                     const wallpaperURL = await getDownloadURL(wallpaperRef);
-                    console.log("wallpaper URL:", wallpaperURL);
-
-                    // Atualizar a URL do wallpaper
-                    setUploadedWallpaperURL(wallpaperURL);
+                    console.log("Wallpaper URL:", wallpaperURL);
 
                     // Navegar para a próxima tela, passando o estado atualizado
-                    // console.log(wallpaperURL);
                     navigate("/create/famous/avatar", {
-                        state: { ...state, wallpaper:wallpaperURL },
+                        state: { ...state, wallpaper: wallpaperURL },
                     });
 
                     setLoading(false);  // Finaliza o loading
@@ -61,7 +56,7 @@ function App() {
             sx={{
                 margin: 0,
                 color: "#fff",
-                backgroundImage: `url(${uploadedWallpaperURL ? uploadedWallpaperURL : wallpaperFile ? URL.createObjectURL(wallpaperFile) : backgroundImage})`,
+                backgroundImage: `url(${wallpaperFile ? URL.createObjectURL(wallpaperFile) : backgroundImage})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
@@ -79,10 +74,10 @@ function App() {
 
             <Stack
                 bgcolor="#fff"
-                width="600px"
-                height="700px"
+                width={{ xs: "90%", sm: "600px" }} // Largura responsiva para celulares e desktops
+                maxWidth="600px" // Largura máxima para desktops
                 borderRadius="10px"
-                padding="40px"
+                padding={{ xs: "20px", sm: "40px" }} // Padding responsivo
                 boxSizing="border-box"
                 display="flex"
                 flexDirection="column"
@@ -90,13 +85,13 @@ function App() {
                 alignItems="center"
                 position="relative"
                 boxShadow={3}
-                spacing={6}
             >
-                <Stack direction="column">
+                <Stack direction="column" alignItems="center">
                     <Typography
                         sx={{
                             color: "#000",
                             fontWeight: 900,
+                            textAlign: "center", // Centraliza o texto
                         }}
                         variant="h4"
                     >
@@ -107,6 +102,7 @@ function App() {
                         sx={{
                             color: "#000",
                             marginTop: "0",
+                            textAlign: "center", // Centraliza o texto
                         }}
                         fontWeight={100}
                         variant="h5"
@@ -120,12 +116,11 @@ function App() {
                     style={{ display: "none" }}
                     id="wallpaper-upload"
                     type="file"
-                    onChange={(e) => setWallpaperFile(e.target.files[0])}  
+                    onChange={(e) => setWallpaperFile(e.target.files[0])}
                 />
 
                 <label htmlFor="wallpaper-upload">
                     <Stack
-                        alt="Wallpaper Preview"
                         sx={{
                             width: 300,
                             height: 300,
@@ -142,28 +137,30 @@ function App() {
                             border: "2px dashed #ccc",
                         }}
                     >
-                        {!wallpaperFile ? (
+                        {!wallpaperFile && (
                             <Typography sx={{ color: "white", fontWeight: "bold", textAlign: "center", padding: "10px" }}>
                                 Selecione um fundo
                             </Typography>
-                        ) : null}
+                        )}
                     </Stack>
                 </label>
 
+                {/* Botão Responsivo */}
                 <Button
                     variant="contained"
                     size="large"
                     onClick={next}
-                    disabled={!wallpaperFile || loading}  
+                    disabled={!wallpaperFile || loading}
                     sx={{
                         marginTop: "30px",
                         backgroundColor: (theme) => theme.palette.secondary.main,
                         "&:hover": {
                             backgroundColor: (theme) => theme.palette.secondary.dark,
                         },
-                        position: "absolute",
-                        bottom: 20,
-                        right: 20,
+                        width: { xs: '100%', sm: '150px' }, // 100% em mobile e largura fixa em desktop
+                        position: { xs: 'static', sm: 'absolute' }, // Estilo estático em mobile e absoluto em desktop
+                        bottom: { sm: 20 }, // Posiciona no canto inferior direito em desktop
+                        right: { sm: 20 }, // Posiciona no canto inferior direito em desktop
                     }}
                 >
                     {loading ? <CircularProgress size={24} color="inherit" /> : "Próximo"}

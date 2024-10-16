@@ -12,9 +12,8 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
-    import { useNavigate, useLocation } from "react-router-dom";
-import { db, collection, getDocs } from "../firebaseConfig"; 
-
+import { useNavigate, useLocation } from "react-router-dom";
+import { db, collection, getDocs } from "../firebaseConfig";
 
 function App() {
     const location = useLocation();
@@ -22,7 +21,7 @@ function App() {
     const characterCreated = state?.createdCharacter;
     const navigate = useNavigate();
     const [showAlert, setShowAlert] = useState(false);
-    const [characters, setCharacters] = useState([]); 
+    const [characters, setCharacters] = useState([]);
 
     useEffect(() => {
         const fetchCharacters = async () => {
@@ -77,8 +76,10 @@ function App() {
                 boxSizing="border-box"
                 sx={{ background: (theme) => theme.palette.primary.main }}
             >
-                <Typography variant="h2">CONVERSAR</Typography>
-                <TextField
+                <Typography variant="h2" fontSize={{ xs: "24px", sm: "36px" }}>
+                    CONVERSAR
+                </Typography>
+                {/* <TextField
                     placeholder="Pesquisar"
                     size="small"
                     variant="outlined"
@@ -92,6 +93,8 @@ function App() {
                         "& .MuiInputLabel-root.Mui-focused": {
                             color: "white",
                         },
+                        maxWidth: "200px", // Limitar largura
+                        width: "100%",
                     }}
                     InputProps={{
                         startAdornment: (
@@ -100,8 +103,9 @@ function App() {
                             </InputAdornment>
                         ),
                     }}
-                />
+                /> */}
             </Stack>
+
             <Stack
                 direction="row"
                 flexWrap="wrap"
@@ -109,67 +113,58 @@ function App() {
                 justifyContent="center"
                 sx={{
                     overflowY: "auto",
-                    padding: "40px",
+                    padding: { xs: "20px", sm: "40px" },
+                    gap: "20px", // Espaço entre cards
                 }}
             >
-                <Stack
-                    direction="row"
-                    flexWrap="wrap"
-                    alignItems="center"
-                    justifyContent="center"
-                    sx={{
-                        overflowY: "auto",
-                        padding: "10px",
-                    }}
-                    gap="40px"
-                >
-                    {characters.map((character) => (
-                        <Card
-                            key={character.id}
-                            onClick={() => navigate(`/chat/${character.id}`)}
-                            sx={{
-                                width: 200,
-                                maxHeight: 210,
-                                backgroundColor: "#222",
-                                color: "#fff",
-                                cursor: "pointer",
-                                "&:hover": {
-                                    backgroundColor: "#333",
-                                    "& .MuiTypography-root": {
-                                        color: (theme) =>
-                                            theme.palette.secondary.main,
-                                    },
-                                    "& .MuiAvatar-root": {
-                                        transform: "scale(1.1)",
-                                        transition: "transform 0.3s",
-                                    },
+                {characters.map((character) => (
+                    <Card
+                        key={character.id}
+                        onClick={() => navigate(`/chat/${character.id}`)}
+                        sx={{
+                            width: { xs: "150px", sm: "200px" }, // Tamanho responsivo dos cards
+                            maxHeight: 210,
+                            backgroundColor: "#222",
+                            color: "#fff",
+                            cursor: "pointer",
+                            "&:hover": {
+                                backgroundColor: "#333",
+                                "& .MuiTypography-root": {
+                                    color: (theme) =>
+                                        theme.palette.secondary.main,
                                 },
-                            }}
-                        >
-                            <CardMedia
-                                component="img"
-                                alt={character.name}
-                                height="140"
-                                image={character.avatar} // A URL do avatar deve ser pública
-                            />
-                            <CardContent>
-                                <Typography
-                                    variant="h6"
-                                    component="div"
-                                    sx={{
-                                        textAlign: "center",
-                                        overflow: "hidden",
-                                        textOverflow: "ellipsis",
-                                        whiteSpace: "nowrap",
-                                    }}
-                                >
-                                    {character.name}
-                                </Typography>
-                            </CardContent>
-                        </Card>
-                    ))}
-                </Stack>
+                                "& .MuiAvatar-root": {
+                                    transform: "scale(1.1)",
+                                    transition: "transform 0.3s",
+                                },
+                            },
+                        }}
+                    >
+                        <CardMedia
+                            component="img"
+                            alt={character.name}
+                            height="140"
+                            image={character.avatar} // A URL do avatar deve ser pública
+                        />
+                        <CardContent>
+                            <Typography
+                                variant="h6"
+                                component="div"
+                                sx={{
+                                    textAlign: "center",
+                                    overflow: "hidden",
+                                    textOverflow: "ellipsis",
+                                    whiteSpace: "nowrap",
+                                    fontSize: { xs: "14px", sm: "16px" }, // Tamanho responsivo do texto
+                                }}
+                            >
+                                {character.name}
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                ))}
             </Stack>
+
             <IconButton
                 aria-label="create"
                 size="large"
@@ -178,8 +173,8 @@ function App() {
                     bottom: 15,
                     right: 15,
                     background: (theme) => theme.palette.secondary.main,
-                    width: "70px",
-                    height: "70px",
+                    width: "60px", // Dimensão responsiva
+                    height: "60px",
                 }}
                 onClick={() => navigate("/create")}
             >
