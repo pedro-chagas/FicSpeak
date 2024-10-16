@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/FicSpeak/static/css/main.ee1d97ca.css",
-    "main.js": "/FicSpeak/static/js/main.bee58e62.js",
+    "main.js": "/FicSpeak/static/js/main.750c3bc0.js",
     "static/js/453.0bad63bf.chunk.js": "/FicSpeak/static/js/453.0bad63bf.chunk.js",
     "static/media/messi.png": "/FicSpeak/static/media/messi.0a12b04fe6c363aaf36e.png",
     "static/media/background_create.jpeg": "/FicSpeak/static/media/background_create.07ba798b8cc0d6d2b4fc.jpeg",
@@ -11,11 +11,11 @@
     "static/media/anonymous.png": "/FicSpeak/static/media/anonymous.7ce45f002f7243473d37.png",
     "index.html": "/FicSpeak/index.html",
     "main.ee1d97ca.css.map": "/FicSpeak/static/css/main.ee1d97ca.css.map",
-    "main.bee58e62.js.map": "/FicSpeak/static/js/main.bee58e62.js.map",
+    "main.750c3bc0.js.map": "/FicSpeak/static/js/main.750c3bc0.js.map",
     "453.0bad63bf.chunk.js.map": "/FicSpeak/static/js/453.0bad63bf.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ee1d97ca.css",
-    "static/js/main.bee58e62.js"
+    "static/js/main.750c3bc0.js"
   ]
 }
