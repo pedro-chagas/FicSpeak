@@ -8,7 +8,7 @@ function App() {
     const navigate = useNavigate();
 
     function next() {
-        navigate("/login/interests");
+        navigate("FicSpeak//login/interests");
         localStorage.setItem("name", name);
     }
 

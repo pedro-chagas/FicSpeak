@@ -55,7 +55,7 @@ function Create() {
                         width: "70px",
                         height: "70px",
                     }}
-                    onClick={() => navigate("/")}
+                    onClick={() => navigate("/FicSpeak/")}
                 >
                     <BackIcon fontSize="inherit" />
                 </IconButton>
@@ -88,19 +88,19 @@ function Create() {
                         image: anonymous,
                         title: "Criar seu próprio",
                         subtitle: "personagem",
-                        path: "/create/custom",
+                        path: "/FicSpeak/create/custom",
                     },
                     {
                         image: messi,
                         title: "Criar um personagem",
                         subtitle: "famoso",
-                        path: "/create/famous",
+                        path: "/FicSpeak/create/famous",
                     },
                     {
                         image: luffy,
                         title: "Criar personagem",
                         subtitle: "existente",
-                        path: "/create/existent",
+                        path: "/FicSpeak/create/existent",
                     },
                 ].map(({ image, title, subtitle, path }, index) => (
                     <Grid item xs={12} sm={6} md={4} key={index}>

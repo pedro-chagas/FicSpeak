@@ -7,16 +7,33 @@ import {
     Autocomplete,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { db, collection, addDoc } from "../../firebaseConfig"; // Importe addDoc
 import backgroundImage from "../../midia/background_login.jpg";
 
 function App() {
     const [interests, setInterests] = useState([]);
     const navigate = useNavigate();
+    const name = localStorage.getItem("name"); // Obtém o nome do localStorage
 
-    function next() {
-        localStorage.setItem("interests", JSON.stringify(interests));
-        navigate("/");
-    }
+    const saveUserData = async () => {
+        try {
+            const userData = {
+                name: name,
+                interests: interests,
+            };
+
+            // Salva os dados na coleção "users"
+            await addDoc(collection(db, "users"), userData);
+            console.log("Usuário salvo com sucesso");
+        } catch (error) {
+            console.error("Erro ao salvar o usuário:", error);
+        }
+    };
+
+    const next = () => {
+        saveUserData(); // Chama a função para salvar os dados
+        navigate("/FicSpeak"); // Navega para a próxima página
+    };
 
     return (
         <Stack
@@ -58,7 +75,7 @@ function App() {
                 position="relative"
                 boxShadow={3}
             >
-                <Stack alignItems="center" direction="row" spacing={1} >
+                <Stack alignItems="center" direction="row" spacing={1}>
                     <Typography
                         sx={{ color: (theme) => theme.palette.primary.main }}
                         variant="h4"

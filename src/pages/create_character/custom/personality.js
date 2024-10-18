@@ -10,7 +10,7 @@ function App() {
     const { state } = location;
 
     function next() {
-        navigate("/create/custom/history", { state: { ...state, personality } });
+        navigate("/FicSpeak/create/custom/history", { state: { ...state, personality } });
     }
 
     return (

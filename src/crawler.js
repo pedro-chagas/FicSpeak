@@ -4,44 +4,55 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { useNavigate, useLocation } from "react-router-dom";
 
 
-const famousCharacters =  [
+const famousCharacters = [
     {
-        name: "Superman",
-        personality: "Nobre, altruísta e sempre busca fazer o bem.",
-        response: "Defende a verdade e a justiça, lutando para proteger a humanidade de qualquer ameaça.",
-        nacionality: "Kryptoniano",
-        details: "Kal-El, mais conhecido como Superman, é um dos heróis mais poderosos da DC, com habilidades como superforça, voo e visão de calor. Ele é um símbolo de esperança e justiça.",
-        wallpaper: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmAQfQIae0C9Jbct9EI4kWGooVP-WdDh7IcQ&s",
-        avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl7SoGEkeaBeU0lZLk7DywwRESDzUVWWAvpg&s"
+        name: "Yuji Itadori",
+        personality: "Companheiro, altruísta e determinado.",
+        response: "Luta com todas as suas forças para proteger seus amigos e cumprir sua promessa de uma morte honrosa.",
+        nacionality: "Japonês",
+        details: "Yuji Itadori é um estudante que se torna um feiticeiro após consumir o dedo de Sukuna, o Rei das Maldições. Ele equilibra o poder de Sukuna dentro de si enquanto luta contra maldições.",
+        wallpaper: "https://c4.wallpaperflare.com/wallpaper/158/122/422/anime-anime-boys-jujutsu-kaisen-yuji-itadori-sakuna-hd-wallpaper-preview.jpg",
+        avatar: "https://i.pinimg.com/736x/9e/62/df/9e62df5524b53a18842ab3d3c8c173cb.jpg"
     },
     {
-        name: "Batman",
-        personality: "Determinado, estrategista e movido pela justiça.",
-        response: "Usa sua inteligência e habilidades para combater o crime em Gotham City, sempre agindo com precisão e sem piedade com criminosos.",
-        nacionality: "Americano",
-        details: "Bruce Wayne, o Batman, usa sua riqueza e habilidades físicas e mentais para proteger Gotham como um vigilante. Ele não tem poderes, mas sua força, gadgets e inteligência o tornam um dos heróis mais temidos.",
-        wallpaper: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoZYpqeZrJTUoizQMJyVSgR8MDISTh7hJezg&s",
-        avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC8WCjCmeO0-7MGinBFFHgqmkejuiy1lHhYw&s"
+        name: "Megumi Fushiguro",
+        personality: "Calmo, reservado e protetor.",
+        response: "Usa seu poder de invocação para combater maldições e proteger os mais fracos, seguindo sua própria justiça.",
+        nacionality: "Japonês",
+        details: "Megumi é um feiticeiro que usa técnicas de invocação sombria, manipulando shikigamis (espíritos) para lutar. Ele é um aliado próximo de Yuji e acredita que salvar as pessoas vale mais do que cumprir regras.",
+        wallpaper: "https://images8.alphacoders.com/133/1337441.png",
+        avatar: "https://i.pinimg.com/736x/93/f0/36/93f036d7375686c332dbfe32b5845f52.jpg"
     },
     {
-        name: "Mulher-Maravilha",
-        personality: "Corajosa, compassiva e determinada a lutar pela paz.",
-        response: "Usa sua força e habilidades de combate para defender os inocentes e lutar pela justiça e igualdade.",
-        nacionality: "Amazona",
-        details: "Diana Prince, a Mulher-Maravilha, é uma guerreira Amazona com habilidades sobre-humanas, treinada para ser uma campeã do bem e da justiça.",
-        wallpaper: "https://wallpapers.com/images/hd/wonder-woman-running-raised-arm-dmd0qa82n9816vlc.jpg",
-        avatar: "https://www.beautyeditor.com.br/wp-content/uploads/2017/11/beleza-gal-gadot-maquiagem-corpo-mulher-maravilha.jpg"
+        name: "Nobara Kugisaki",
+        personality: "Confiante, teimosa e destemida.",
+        response: "Enfrenta as maldições sem medo, valorizando tanto sua força quanto sua aparência.",
+        nacionality: "Japonês",
+        details: "Nobara é uma feiticeira que usa uma técnica única baseada em bonecos de palha e martelos, permitindo que ela ataque as maldições de forma criativa. Ela luta ao lado de Yuji e Megumi.",
+        wallpaper: "https://images6.alphacoders.com/113/thumb-1920-1139591.jpg",
+        avatar: "https://i.pinimg.com/originals/85/19/67/851967be3b9fcca0670b6850b57904de.jpg"
     },
     {
-        name: "Flash",
-        personality: "Divertido, otimista e cheio de energia.",
-        response: "Usa sua supervelocidade para ajudar os outros e lutar contra o crime rapidamente.",
-        nacionality: "Americano",
-        details: "Barry Allen, também conhecido como Flash, é o homem mais rápido do mundo, capaz de se mover a velocidades incríveis, viajar no tempo e vibrar através de objetos.",
-        wallpaper: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7YMpH8hSskxj1GJxXh1gCiS9pKWYAzIT8uQ&s",
-        avatar: "https://sm.ign.com/ign_pt/news/t/the-flash-/the-flash-exclusive-behind-the-scenes-clip-from-the-musical_m3rw.jpg"
+        name: "Satoru Gojo",
+        personality: "Arrogante, brincalhão, mas incrivelmente poderoso e protetor.",
+        response: "Usa suas habilidades sobre-humanas para proteger seus alunos e combater maldições com confiança absoluta em sua força.",
+        nacionality: "Japonês",
+        details: "Gojo é o feiticeiro mais forte da série, mestre em técnicas de barreira e manipulação do espaço-tempo. Ele é professor de Yuji, Megumi e Nobara, e desafia a estrutura do mundo dos feiticeiros.",
+        wallpaper: "https://i.pinimg.com/originals/8e/71/58/8e71585181c09cd829f061ec2389bf9e.jpg",
+        avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSac0EihZ4qDHvW8-gw42jMLCmQE4Vx5BMrNQ&s"
     },
+    {
+        name: "Sukuna",
+        personality: "Cruel, sádico e implacável.",
+        response: "Despreza a humanidade e busca dominar o mundo, usando sua força devastadora para eliminar qualquer um que cruze seu caminho.",
+        nacionality: "Desconhecido (Antigo Rei das Maldições)",
+        details: "Sukuna, também conhecido como o Rei das Maldições, é uma entidade antiga e extremamente poderosa que reside dentro de Yuji Itadori. Ele está sempre em conflito com Yuji, aguardando o momento certo para tomar o controle total.",
+        wallpaper: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcRd5nZn0wmv5tztlRYeSFjorNwy8IZP7Y_w&s",
+        avatar: "https://i.pinimg.com/736x/78/b4/d4/78b4d40ab57f2d51dd7c23888f086335.jpg"
+    }
 ];
+
+
 
 
 

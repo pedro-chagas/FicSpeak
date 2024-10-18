@@ -37,7 +37,7 @@ const isAuthenticated = () => {
     const name = localStorage.getItem("name");
 
     if (!name) {
-        return redirect("/login");
+        return redirect("/FicSpeak/login");
     }
 
     return null;
@@ -45,145 +45,140 @@ const isAuthenticated = () => {
 
 const router = createBrowserRouter([
     {
-        path: "/",
+        path: "/FicSpeak/",
         loader: isAuthenticated,
         element: <Home />,
     },
     {
-        path: "/crawler",
+        path: "/FicSpeak/crawler",
         loader: isAuthenticated,
         element: <Crawler />,
     },
     {
-        path: "/create",
+        path: "/FicSpeak/create",
         loader: isAuthenticated,
         element: <CreateCharacter />,
     },
     {
-        path: "/FicSpeak",
-        loader: () => redirect("/"),
-        element: <Home />,
-    },
-    {
-        path: "/create/existent",
+        path: "/FicSpeak/create/existent",
         loader: isAuthenticated,
         element: <CreateExistenting />,
     },
     {
-        path: "/create/existent/universe",
+        path: "/FicSpeak/create/existent/universe",
         loader: isAuthenticated,
         element: <CreateExistentingUniverse />,
     },
     {
-        path: "/create/existent/response",
+        path: "/FicSpeak/create/existent/response",
         loader: isAuthenticated,
         element: <CreateExistentingResponse />,
     },
     {
-        path: "/create/existent/history",
+        path: "/FicSpeak/create/existent/history",
         loader: isAuthenticated,
         element: <CreateExistentingHistory />,
     },
     {
-        path: "/create/existent/personality",
+        path: "/FicSpeak/create/existent/personality",
         loader: isAuthenticated,
         element: <CreateExistentingPersonality />,
     },
     {
-        path: "/create/existent/wallpaper",
+        path: "/FicSpeak/create/existent/wallpaper",
         loader: isAuthenticated,
         element: <CreateExistentingWallpaper />,
     },
     {
-        path: "/create/existent/avatar",
+        path: "/FicSpeak/create/existent/avatar",
         loader: isAuthenticated,
         element: <CreateExistentingAvatar />,
     },
     {
-        path: "/create/existent",
+        path: "/FicSpeak/create/existent",
         loader: isAuthenticated,
         element: <CreateFamous />,
     },
     {
-        path: "/create/famous/",
+        path: "/FicSpeak/create/famous/",
         loader: isAuthenticated,
         element: <CreateFamous />,
     },
     {
-        path: "/create/famous/response",
+        path: "/FicSpeak/create/famous/response",
         loader: isAuthenticated,
         element: <CreateFamousResponse />,
     },
     {
-        path: "/create/famous/personality",
+        path: "/FicSpeak/create/famous/personality",
         loader: isAuthenticated,
         element: <CreateFamousPersonality />,
     },
     {
-        path: "/create/famous/details",
+        path: "/FicSpeak/create/famous/details",
         loader: isAuthenticated,
         element: <CreateFamousDetils />,
     },
     {
-        path: "/create/famous/nacionality",
+        path: "/FicSpeak/create/famous/nacionality",
         loader: isAuthenticated,
         element: <CreateFamousNacionality />,
     },
     {
-        path: "/create/famous/wallpaper",
+        path: "/FicSpeak/create/famous/wallpaper",
         loader: isAuthenticated,
         element: <CreateFamousWallpaper />,
     },
     {
-        path: "/create/famous/avatar",
+        path: "/FicSpeak/create/famous/avatar",
         loader: isAuthenticated,
         element: <CreateFamousAvatar />,
     },
     {
-        path: "/create/custom",
+        path: "/FicSpeak/create/custom",
         loader: isAuthenticated,
         element: <CreateCustom />,
     },
     {
-        path: "/create/custom/response",
+        path: "/FicSpeak/create/custom/response",
         loader: isAuthenticated,
         element: <CreateCustomResponse />,
     },
     {
-        path: "/create/custom/personality",
+        path: "/FicSpeak/create/custom/personality",
         loader: isAuthenticated,
         element: <CreateCustomPersonality />,
     },
     {
-        path: "/create/custom/history",
+        path: "/FicSpeak/create/custom/history",
         loader: isAuthenticated,
         element: <CreateCustomHistory />,
     },
     {
-        path: "/create/custom/wallpaper",
+        path: "/FicSpeak/create/custom/wallpaper",
         loader: isAuthenticated,
         element: <CreateCustomWallpaper />,
     },
     {
-        path: "/create/custom/avatar",
+        path: "/FicSpeak/create/custom/avatar",
         loader: isAuthenticated,
         element: <CreateCustomAvatar />,
     },
     {
-        path: "/chat/:id",
+        path: "/FicSpeak/chat/:id",
         loader: isAuthenticated,
         element: <Chat />,
     },
     {
-        path: "/login",
+        path: "/FicSpeak/login",
         element: <Welcome />,
     },
     {
-        path: "/login/name",
+        path: "/FicSpeak/login/name",
         element: <Name />,
     },
     {
-        path: "/login/interests",
+        path: "/FicSpeak/login/interests",
         element: <Interests />,
     },
     {

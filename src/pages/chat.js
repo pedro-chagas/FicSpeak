@@ -172,11 +172,11 @@ function App() {
                 alignItems="center"
                 padding="15px"
                 boxSizing="border-box"
-                sx={{ background: (theme) => theme.palette.primary.main }}
+                sx={{ background: (theme) => theme.palette.primary.main,opacity:"90%" }}
             >
                 <IconButton
                     aria-label="back"
-                    onClick={() => navigate("/")}
+                    onClick={() => navigate("/FicSpeak")}
                     sx={{ width: "50px", height: "50px" }}
                 >
                     <BackIcon />

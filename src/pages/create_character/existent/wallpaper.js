@@ -32,7 +32,7 @@ function App() {
                     const wallpaperURL = await getDownloadURL(wallpaperRef);
                     console.log("Wallpaper URL:", wallpaperURL);
 
-                    navigate("/create/existent/avatar", {
+                    navigate("/FicSpeak/create/existent/avatar", {
                         state: { ...state, wallpaper: wallpaperURL },
                     });
 

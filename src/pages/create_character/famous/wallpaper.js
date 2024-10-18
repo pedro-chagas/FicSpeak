@@ -34,7 +34,7 @@ function App() {
                     console.log("Wallpaper URL:", wallpaperURL);
 
                     // Navegar para a próxima tela, passando o estado atualizado
-                    navigate("/create/famous/avatar", {
+                    navigate("/FicSpeak/create/famous/avatar", {
                         state: { ...state, wallpaper: wallpaperURL },
                     });
 

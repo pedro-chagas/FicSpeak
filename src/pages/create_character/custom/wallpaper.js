@@ -34,7 +34,7 @@ function App() {
                     console.log("Wallpaper URL:", wallpaperURL);
                     setUploadedWallpaperURL(wallpaperURL);
 
-                    navigate("/create/custom/avatar", {
+                    navigate("/FicSpeak/create/custom/avatar", {
                         state: { ...state, wallpaper: wallpaperURL },
                     });
 

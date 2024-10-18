@@ -45,7 +45,7 @@ function App() {
                     await setDoc(docRef, characterData);
                     console.log("Character saved successfully!");
 
-                    navigate("/", { state: { createdCharacter: true } });
+                    navigate("/FicSpeak", { state: { createdCharacter: true } });
                     setLoading(false);  // Encerra o loading
                 }
             );

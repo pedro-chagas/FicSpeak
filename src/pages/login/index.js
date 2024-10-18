@@ -64,7 +64,7 @@ function App() {
                 <Button
                     variant="contained"
                     size="large"
-                    onClick={() => navigate("/login/name")}
+                    onClick={() => navigate("/FicSpeak/login/name")}
                     sx={{
                         backgroundColor: (theme) =>
                             theme.palette.secondary.main,

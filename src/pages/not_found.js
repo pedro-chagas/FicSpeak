@@ -22,7 +22,7 @@ function NotFound() {
             </Typography>
             <Button
                 variant="contained"
-                onClick={() => navigate("/")}
+                onClick={() => navigate("/FicSpeak")}
                 sx={{ backgroundColor: "secondary.main" }}
             >
                 Voltar para Home

@@ -10,7 +10,7 @@ function App() {
     const { state } = location;
 
     function next() {
-        navigate("/create/famous/wallpaper", { state: { ...state, nacionality: name } });
+        navigate("/FicSpeak/create/famous/wallpaper", { state: { ...state, nacionality: name } });
     }
 
     return (
