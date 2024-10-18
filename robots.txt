@@ -1,0 +1,5 @@
+# Permitir que todos os mecanismos de busca acessem o site
+User-agent: *
+Allow: /
+
+# User-agent: *
