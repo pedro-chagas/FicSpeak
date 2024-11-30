@@ -1,8 +1,21 @@
 import React, { useState } from "react";
 
 const fetchGeminiResponse = async (message) => {
-    const apiKey = "AIzaSyBGP-ZMxkXmo3d76e4pcg9aGbt-PrOSf6w";
+    const apiKey = "AIzaSyCsQfk3e6Krnr_s9qMSZQDrqOq3WPCQSJw";
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
+    const requestNotificationPermission = async () => {
+        if (Notification.permission === "granted") {
+            console.log("Permissão já concedida.");
+            return true;
+        } else if (Notification.permission !== "denied") {
+            const permission = await Notification.requestPermission();
+            return permission === "granted";
+        }
+        console.warn("Permissão negada.");
+        return false;
+    };
+
+
 
     const data = {
         contents: [
