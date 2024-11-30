@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const fetchGeminiResponse = async (message) => {
-    const apiKey = "AIzaSyCsQfk3e6Krnr_s9qMSZQDrqOq3WPCQSJw";
+    const apiKey = "AIzaSyD1IWMUDcHyWhrqLeMjnNkj3YEF_uT1mUc";
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
     const requestNotificationPermission = async () => {
         if (Notification.permission === "granted") {
