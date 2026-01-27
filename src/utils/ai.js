@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const fetchGeminiResponse = async (message) => {
-    const apiKey = "AIzaSyBGP-ZMxkXmo3d76e4pcg9aGbt-PrOSf6w";
+    const apiKey = "AIzaSyCn_894l-T4DNxcfrzEZiAC0nwE_r2zEvk";
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
 
     const data = {
